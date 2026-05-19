@@ -12,14 +12,16 @@
 <style>
   * { font-family: 'Inter', system-ui, sans-serif; }
 
+  html { scroll-behavior: smooth; }
+
   :root {
     --bg1: #0A0F2A;
     --bg2: #020617;
     --text: #F8FAFC;
-    --muted: #CBD5E1;
-    --card: rgba(12, 20, 35, 0.75);
-    --border: rgba(255,255,255,0.12);
-    --cyan: #0EA5E9;
+    --muted: #E2E8F0; /* FIX: brighter for readability */
+    --card: rgba(15, 23, 42, 0.72);
+    --border: rgba(255,255,255,0.14);
+    --cyan: #22D3EE;
     --gold: #F59E0B;
   }
 
@@ -31,11 +33,32 @@
   .glass {
     background: var(--card);
     border: 1px solid var(--border);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   }
 
   .btn {
     background: linear-gradient(105deg, #0EA5E9, #2563EB, #7C3AED);
+    transition: all 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+  }
+
+  a {
+    transition: 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--cyan);
+  }
+
+  .nav-glass {
+    background: rgba(2, 6, 23, 0.75);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 </style>
 </head>
@@ -43,27 +66,28 @@
 <body>
 
 <!-- NAV -->
-<nav class="fixed w-full top-0 z-50 glass px-6 py-4">
+<nav class="fixed w-full top-0 z-50 nav-glass px-6 py-4">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <div class="text-2xl font-black">
-      NORTH<span class="text-cyan-400">SKY</span>
+
+    <div class="text-2xl font-black tracking-tight">
+      NORTH<span class="text-cyan-300">SKY</span>
     </div>
 
     <div class="hidden md:flex gap-8 text-sm text-slate-300">
       <a href="#solution">Platform</a>
       <a href="#results">Impact</a>
-      <a href="#pricing">Plans</a>
       <a href="#testimonials">Clients</a>
     </div>
 
     <button class="btn px-5 py-2 rounded-lg font-semibold text-white">
       Request Demo
     </button>
+
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="pt-36 px-6">
+<section class="pt-40 px-6">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
 
     <div>
@@ -71,7 +95,7 @@
         Pipeline intelligence for modern contracting teams
       </h1>
 
-      <p class="text-slate-300 mt-6 text-lg">
+      <p class="text-slate-300 mt-6 text-lg leading-relaxed">
         NorthSky helps teams identify, qualify, and manage high-intent homeowner demand with structured data and real-time insights.
       </p>
 
@@ -79,23 +103,24 @@
         <button class="btn px-6 py-3 rounded-xl text-white font-semibold">
           Request Demo
         </button>
-        <a href="#solution" class="glass px-6 py-3 rounded-xl">
+
+        <a href="#solution" class="glass px-6 py-3 rounded-xl text-slate-200">
           View Platform
         </a>
       </div>
     </div>
 
     <!-- LIVE FEED -->
-    <div class="glass rounded-2xl p-5">
-      <div class="font-bold mb-4 flex items-center gap-2">
-        <i class="fa-solid fa-bolt text-cyan-400"></i>
+    <div class="glass rounded-2xl p-6">
+      <div class="font-bold mb-4 flex items-center gap-2 text-slate-100">
+        <i class="fa-solid fa-bolt text-cyan-300"></i>
         Live Activity Feed
       </div>
 
       <div class="space-y-3 text-sm text-slate-200">
-        <div class="p-3 bg-black/30 rounded-lg">New roofing inquiry detected — Austin, TX</div>
-        <div class="p-3 bg-black/30 rounded-lg">Storm-related request — Denver, CO</div>
-        <div class="p-3 bg-black/30 rounded-lg">Residential inspection request — Phoenix, AZ</div>
+        <div class="p-3 bg-black/30 rounded-lg border border-white/5">New roofing inquiry — Austin, TX</div>
+        <div class="p-3 bg-black/30 rounded-lg border border-white/5">Storm-related request — Denver, CO</div>
+        <div class="p-3 bg-black/30 rounded-lg border border-white/5">Inspection request — Phoenix, AZ</div>
       </div>
     </div>
 
@@ -105,10 +130,14 @@
 <!-- SOLUTION -->
 <section id="solution" class="py-24 px-6">
   <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-4xl font-black">Built for pipeline visibility and speed</h2>
-    <p class="text-slate-300 mt-4">Organize demand, reduce response time, and improve conversion workflows.</p>
 
-    <div class="grid md:grid-cols-3 gap-8 mt-12">
+    <h2 class="text-4xl font-black">Built for pipeline visibility and speed</h2>
+
+    <p class="text-slate-300 mt-4">
+      Organize demand, reduce response time, and improve conversion workflows.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8 mt-12 text-left">
 
       <div class="glass p-6 rounded-2xl">
         <h3 class="font-bold text-xl">Lead Intelligence</h3>
@@ -132,23 +161,26 @@
 <!-- RESULTS -->
 <section id="results" class="py-20 px-6">
   <div class="max-w-5xl mx-auto glass p-10 rounded-2xl text-center">
+
     <h2 class="text-3xl font-black">Operational improvements teams report</h2>
 
     <div class="grid md:grid-cols-3 gap-6 mt-10 text-slate-200">
+
       <div>
-        <div class="text-3xl font-black text-cyan-400">Faster</div>
-        <div class="text-sm">lead response cycles</div>
+        <div class="text-3xl font-black text-cyan-300">Faster</div>
+        <div class="text-sm text-slate-300">lead response cycles</div>
       </div>
 
       <div>
-        <div class="text-3xl font-black text-cyan-400">Cleaner</div>
-        <div class="text-sm">qualification process</div>
+        <div class="text-3xl font-black text-cyan-300">Cleaner</div>
+        <div class="text-sm text-slate-300">qualification process</div>
       </div>
 
       <div>
-        <div class="text-3xl font-black text-cyan-400">Stronger</div>
-        <div class="text-sm">pipeline visibility</div>
+        <div class="text-3xl font-black text-cyan-300">Stronger</div>
+        <div class="text-sm text-slate-300">pipeline visibility</div>
       </div>
+
     </div>
   </div>
 </section>
@@ -156,18 +188,19 @@
 <!-- TESTIMONIALS -->
 <section id="testimonials" class="py-24 px-6">
   <div class="max-w-6xl mx-auto text-center">
+
     <h2 class="text-4xl font-black">What teams say</h2>
 
-    <div class="grid md:grid-cols-2 gap-8 mt-12">
+    <div class="grid md:grid-cols-2 gap-8 mt-12 text-left">
 
       <div class="glass p-6 rounded-2xl">
-        <p class="italic">“We finally have structured visibility into incoming demand.”</p>
-        <div class="mt-4 font-bold">Operations Lead</div>
+        <p class="text-slate-200">“We finally have structured visibility into incoming demand.”</p>
+        <div class="mt-4 font-bold text-slate-100">Operations Lead</div>
       </div>
 
       <div class="glass p-6 rounded-2xl">
-        <p class="italic">“It improved how we prioritize and dispatch jobs.”</p>
-        <div class="mt-4 font-bold">Sales Director</div>
+        <p class="text-slate-200">“It improved how we prioritize and dispatch jobs.”</p>
+        <div class="mt-4 font-bold text-slate-100">Sales Director</div>
       </div>
 
     </div>
@@ -177,12 +210,17 @@
 <!-- CTA -->
 <section class="py-20 px-6">
   <div class="max-w-4xl mx-auto glass p-10 rounded-2xl text-center">
+
     <h2 class="text-4xl font-black">Ready to modernize your pipeline?</h2>
-    <p class="text-slate-300 mt-3">Request a walkthrough of the platform.</p>
+
+    <p class="text-slate-300 mt-3">
+      Request a walkthrough of the platform.
+    </p>
 
     <button class="btn mt-8 px-8 py-4 rounded-xl font-bold text-white">
       Book Demo
     </button>
+
   </div>
 </section>
 
