@@ -12,7 +12,7 @@
 <style>
   * { font-family: 'Inter', system-ui, sans-serif; }
   
-  /* --- DEFAULT DARK MODE VARIABLES (applied automatically) --- */
+  /* --- DEFAULT DARK MODE VARIABLES --- */
   :root {
     --bg-gradient-start: #0A0F2A;
     --bg-gradient-end: #020617;
@@ -20,7 +20,8 @@
     --card-border: rgba(255,255,245,0.12);
     --text-primary: #F8FAFC;
     --text-secondary: #E2E8F0;
-    --text-muted: #94A3B8;
+    --text-muted: #CBD5E1;      /* increased from #94A3B8 for better contrast */
+    --text-muted-light: #94A3B8;
     --border-light: rgba(255,255,255,0.1);
     --accent-cyan: #0EA5E9;
     --accent-gold: #F59E0B;
@@ -34,27 +35,21 @@
     transition: background 0.3s ease, color 0.2s ease;
   }
   
-  /* --- LIGHT MODE OVERRIDES --- */
+  /* --- LIGHT MODE OVERRIDES (higher contrast) --- */
   body.light {
     --bg-gradient-start: #F1F5F9;
     --bg-gradient-end: #E2E8F0;
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --card-border: rgba(0,0,0,0.08);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-border: rgba(0,0,0,0.1);
     --text-primary: #0F172A;
     --text-secondary: #1E293B;
-    --text-muted: #475569;
+    --text-muted: #334155;       /* darker for readability */
+    --text-muted-light: #475569;
     --border-light: rgba(0,0,0,0.1);
     --accent-cyan: #0284C7;
     --accent-gold: #D97706;
     --glass-backdrop: blur(12px);
-    --live-feed-bg: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* re-apply grid pattern for light mode */
-  body.light .bg-grid-luxury {
-    background-image: 
-      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    --live-feed-bg: rgba(255, 255, 255, 0.95);
   }
   
   .bg-grid-luxury {
@@ -63,8 +58,12 @@
       linear-gradient(90deg, rgba(255,215,0,0.05) 1px, transparent 1px);
     background-size: 55px 55px;
   }
+  body.light .bg-grid-luxury {
+    background-image: 
+      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  }
   
-  /* glass cards adapt via variables */
   .glass-premium {
     background: var(--card-bg);
     backdrop-filter: var(--glass-backdrop);
@@ -73,7 +72,6 @@
   }
   .glass-premium:hover {
     border-color: var(--accent-cyan);
-    box-shadow: 0 30px 45px -12px rgba(0,0,0,0.2);
   }
   
   .btn-million {
@@ -95,10 +93,6 @@
     backdrop-filter: blur(8px);
     border: 1px solid rgba(var(--accent-cyan-rgb, 14,165,233), 0.35);
   }
-  body.light .live-feed-card {
-    border-color: rgba(2,132,199,0.25);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  }
   
   .live-item-premium {
     background: linear-gradient(135deg, rgba(15, 25, 50, 0.9), rgba(5, 10, 28, 0.9));
@@ -106,13 +100,21 @@
     transition: all 0.2s;
   }
   body.light .live-item-premium {
-    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    background: #ffffff;
     border-left-color: #D97706;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  
+  /* improved text contrast helpers */
+  .text-muted-contrast {
+    color: var(--text-muted);
+  }
+  .text-muted-light-contrast {
+    color: var(--text-muted-light);
   }
   
   .stat-number {
-    background: linear-gradient(135deg, #FFFFFF, #94A3B8);
+    background: linear-gradient(135deg, #FFFFFF, #CBD5E1);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -120,14 +122,12 @@
   body.light .stat-number {
     background: linear-gradient(135deg, #0F172A, #334155);
     -webkit-background-clip: text;
-    background-clip: text;
   }
   
   .badge-gold {
     background: linear-gradient(135deg, var(--accent-gold), #B45309);
   }
   
-  /* nav link underline */
   nav a::after {
     content: '';
     position: absolute;
@@ -142,7 +142,6 @@
   .custom-scroll::-webkit-scrollbar { width: 4px; }
   .custom-scroll::-webkit-scrollbar-track { background: #0F172A; border-radius: 10px; }
   .custom-scroll::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
-  
   body.light .custom-scroll::-webkit-scrollbar-track { background: #E2E8F0; }
   
   .reveal-on-scroll {
@@ -155,7 +154,6 @@
     transform: translateY(0);
   }
   
-  /* floating orbs only in dark mode by default, but we can keep them subtle in light */
   .bg-orb {
     position: fixed;
     width: 70vw;
@@ -178,7 +176,6 @@
     100% { transform: translate(5%, 8%) scale(1.2); opacity: 0.7; }
   }
   
-  /* toggle button style */
   .theme-toggle {
     background: rgba(255,255,255,0.1);
     border-radius: 40px;
@@ -208,7 +205,7 @@
 <div class="bg-orb orb-1"></div>
 <div class="bg-orb orb-2"></div>
 
-<!-- NAVIGATION - with dark/light toggle -->
+<!-- NAVIGATION -->
 <nav class="fixed w-full top-0 z-50 glass-premium px-6 py-4 border-b border-white/10 backdrop-blur-xl">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
     <div class="text-2xl font-black tracking-tighter text-white flex items-center gap-1">
@@ -222,7 +219,6 @@
       <a href="#testimonials" class="text-slate-200 hover:text-white transition">Prestige</a>
     </div>
     <div class="flex items-center gap-3">
-      <!-- Dark/Light Toggle Button -->
       <div id="themeToggle" class="theme-toggle" role="button" aria-label="Dark/Light mode">
         <i id="themeIcon" class="fa-regular fa-moon text-cyan-200"></i>
       </div>
@@ -233,7 +229,7 @@
   </div>
 </nav>
 
-<!-- HERO SECTION (unchanged content, but theme variables control colors) -->
+<!-- HERO SECTION -->
 <section class="pt-36 pb-20 px-6">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
     <div class="reveal-on-scroll">
@@ -248,9 +244,9 @@
       </p>
       
       <div class="flex flex-wrap gap-10 mt-8 border-t border-white/15 pt-8">
-        <div><div class="text-4xl font-black text-white stat-number">$2.1B+</div><div class="text-slate-300 text-xs uppercase tracking-wider">Total enterprise value</div></div>
-        <div><div class="text-4xl font-black text-white stat-number">94%</div><div class="text-slate-300 text-xs uppercase tracking-wider">Client retention</div></div>
-        <div><div class="text-4xl font-black text-white"><span>15</span><span class="text-lg">min</span></div><div class="text-slate-300 text-xs uppercase tracking-wider">Avg verification SLA</div></div>
+        <div><div class="text-4xl font-black text-white stat-number">$2.1B+</div><div class="text-muted-contrast text-xs uppercase tracking-wider font-medium">Total enterprise value</div></div>
+        <div><div class="text-4xl font-black text-white stat-number">94%</div><div class="text-muted-contrast text-xs uppercase tracking-wider font-medium">Client retention</div></div>
+        <div><div class="text-4xl font-black text-white"><span>15</span><span class="text-lg">min</span></div><div class="text-muted-contrast text-xs uppercase tracking-wider font-medium">Avg verification SLA</div></div>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-5 mt-8">
@@ -261,7 +257,7 @@
           <i class="fa-regular fa-eye mr-2"></i> View platform prestige
         </a>
       </div>
-      <div class="mt-8 flex gap-5 text-sm text-slate-300 items-center flex-wrap">
+      <div class="mt-8 flex gap-5 text-sm text-slate-200 items-center flex-wrap">
         <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> Zero onboarding fee</span>
         <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> 60-day performance pledge</span>
         <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> White‑glove migration</span>
@@ -271,11 +267,11 @@
     <!-- LIVE FEED -->
     <div class="live-feed-card rounded-2xl p-5 shadow-2xl reveal-on-scroll">
       <div class="flex justify-between items-center border-b border-white/15 pb-4 mb-4">
-        <div><div class="font-black text-white flex items-center gap-2 text-lg"><i class="fa-solid fa-bolt text-amber-400"></i> NorthSky Live Vantage</div><div class="text-xs text-slate-300">Verified demand stream · exclusive for partners</div></div>
+        <div><div class="font-black text-white flex items-center gap-2 text-lg"><i class="fa-solid fa-bolt text-amber-400"></i> NorthSky Live Vantage</div><div class="text-muted-contrast text-xs font-medium">Verified demand stream · exclusive for partners</div></div>
         <div class="bg-emerald-500/40 text-emerald-200 text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> LIVE</div>
       </div>
       <div id="liveFeedContainer" class="space-y-3 max-h-[440px] overflow-y-auto pr-1 custom-scroll"></div>
-      <div class="mt-4 text-center text-[11px] text-slate-300 border-t border-white/10 pt-3 flex justify-center gap-4">
+      <div class="mt-4 text-center text-xs text-muted-contrast border-t border-white/10 pt-3 flex justify-center gap-4 font-medium">
         <span><i class="fa-regular fa-clock"></i> real‑time enrichment</span>
         <span><i class="fa-regular fa-shield-haltered"></i> AI verified + budget scored</span>
       </div>
@@ -285,19 +281,17 @@
 
 <!-- LOGO CLOUD -->
 <div class="max-w-7xl mx-auto px-6 py-8 border-y border-white/10 my-4 backdrop-blur-sm reveal-on-scroll">
-  <p class="text-center text-slate-300 text-[11px] uppercase tracking-[0.2em] mb-5 font-semibold">EXCLUSIVE ECOSYSTEM — TRUSTED BY 150+ ENTERPRISE PARTNERS</p>
-  <div class="flex flex-wrap justify-center gap-10 md:gap-16 items-center opacity-80">
-    <span class="text-slate-100 font-bold text-sm tracking-wide">APEX ROOF</span>
-    <span class="text-slate-100 font-bold text-sm tracking-wide">IRONCLAD</span>
-    <span class="text-slate-100 font-bold text-sm tracking-wide">SUMMIT EXTERIORS</span>
-    <span class="text-slate-100 font-bold text-sm tracking-wide">PEAK GROUP</span>
-    <span class="text-slate-100 font-bold text-sm tracking-wide">NEXGEN BUILD</span>
+  <p class="text-center text-muted-contrast text-[11px] uppercase tracking-[0.2em] mb-5 font-semibold">EXCLUSIVE ECOSYSTEM — TRUSTED BY 150+ ENTERPRISE PARTNERS</p>
+  <div class="flex flex-wrap justify-center gap-10 md:gap-16 items-center opacity-90">
+    <span class="text-slate-200 font-bold text-sm tracking-wide">APEX ROOF</span>
+    <span class="text-slate-200 font-bold text-sm tracking-wide">IRONCLAD</span>
+    <span class="text-slate-200 font-bold text-sm tracking-wide">SUMMIT EXTERIORS</span>
+    <span class="text-slate-200 font-bold text-sm tracking-wide">PEAK GROUP</span>
+    <span class="text-slate-200 font-bold text-sm tracking-wide">NEXGEN BUILD</span>
   </div>
 </div>
 
-<!-- SOLUTION, RESULTS, TESTIMONIALS, PRICING, CTA sections (same structure, just theme aware) -->
-<!-- I'll keep them concise but with full content - trimmed for brevity but fully functional -->
-
+<!-- SOLUTION SECTION -->
 <section id="solution" class="py-24 px-6">
   <div class="max-w-7xl mx-auto">
     <div class="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
@@ -306,52 +300,51 @@
       <p class="text-slate-200 mt-4 text-lg">Zero competition, pre‑qualified demand, and real‑time analytics.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-brain-circuit"></i></div><h3 class="text-2xl font-bold text-white">AI Scoring + Wealth Verification</h3><p class="text-slate-200 mt-2 text-sm">Cross-checked, budget-validated leads.</p><div class="mt-5 text-amber-300 text-sm font-semibold">+68% premium conversion →</div></div>
-      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-lock-keyhole"></i></div><h3 class="text-2xl font-bold text-white">Territory Fortress™</h3><p class="text-slate-200 mt-2 text-sm">Exclusive ZIP locking protects margins.</p><div class="mt-5 text-amber-300 text-sm font-semibold">+47% higher ticket value →</div></div>
-      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-cloud-data"></i></div><h3 class="text-2xl font-bold text-white">Real‑time CRM + Dispatch</h3><p class="text-slate-200 mt-2 text-sm">Native sync to Salesforce, HubSpot.</p><div class="mt-5 text-amber-300 text-sm font-semibold">2.3x faster response →</div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-brain-circuit"></i></div><h3 class="text-2xl font-bold text-white">AI Scoring + Wealth Verification</h3><p class="text-slate-200 mt-2 text-sm font-medium">Cross-checked, budget-validated leads.</p><div class="mt-5 text-amber-300 text-sm font-semibold">+68% premium conversion →</div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-lock-keyhole"></i></div><h3 class="text-2xl font-bold text-white">Territory Fortress™</h3><p class="text-slate-200 mt-2 text-sm font-medium">Exclusive ZIP locking protects margins.</p><div class="mt-5 text-amber-300 text-sm font-semibold">+47% higher ticket value →</div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-cloud-data"></i></div><h3 class="text-2xl font-bold text-white">Real‑time CRM + Dispatch</h3><p class="text-slate-200 mt-2 text-sm font-medium">Native sync to Salesforce, HubSpot.</p><div class="mt-5 text-amber-300 text-sm font-semibold">2.3x faster response →</div></div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS section (short version) -->
+<!-- RESULTS SECTION -->
 <section id="results" class="py-12 px-6">
   <div class="max-w-7xl mx-auto glass-premium rounded-3xl p-8 md:p-12 border border-white/10 reveal-on-scroll">
     <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div><div class="text-amber-300 text-sm font-bold tracking-widest">THE ROI ENGINE</div><h2 class="text-3xl lg:text-4xl font-black text-white mt-2">Close rates: 12% → 38%</h2><p class="text-slate-200 mt-4">Exclusive pipeline allocation yields +189% revenue growth.</p><ul class="mt-6 space-y-4"><li class="flex gap-3"><i class="fa-regular fa-chart-line text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">$187k</strong> monthly lead value</span></li><li class="flex gap-3"><i class="fa-regular fa-hourglass-half text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">12h</strong> to signed contract</span></li><li class="flex gap-3"><i class="fa-regular fa-shield-check text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">99.7%</strong> verification accuracy</span></li></ul><button onclick="openDemoModal()" class="mt-8 btn-million px-6 py-3 rounded-xl font-bold">Get your ROI benchmark →</button></div>
-      <div class="bg-black/50 rounded-2xl p-6 border border-amber-500/20 text-center backdrop-blur-sm"><div class="text-6xl font-black text-amber-400">+189%</div><div class="text-slate-200 text-sm">pipeline growth YoY</div><div class="w-full h-px bg-white/15 my-6"></div><div class="grid grid-cols-2 gap-5"><div><span class="text-white font-black text-2xl">0%</span><div class="text-slate-300 text-xs">fraud leads</div></div><div><span class="text-white font-black text-2xl">$28M+</span><div class="text-slate-300 text-xs">largest project</div></div></div></div>
+      <div><div class="text-amber-300 text-sm font-bold tracking-widest">THE ROI ENGINE</div><h2 class="text-3xl lg:text-4xl font-black text-white mt-2">Close rates: 12% → 38%</h2><p class="text-slate-200 mt-4 font-medium">Exclusive pipeline allocation yields +189% revenue growth.</p><ul class="mt-6 space-y-4"><li class="flex gap-3"><i class="fa-regular fa-chart-line text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">$187k</strong> monthly lead value</span></li><li class="flex gap-3"><i class="fa-regular fa-hourglass-half text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">12h</strong> to signed contract</span></li><li class="flex gap-3"><i class="fa-regular fa-shield-check text-amber-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">99.7%</strong> verification accuracy</span></li></ul><button onclick="openDemoModal()" class="mt-8 btn-million px-6 py-3 rounded-xl font-bold">Get your ROI benchmark →</button></div>
+      <div class="bg-black/40 rounded-2xl p-6 border border-amber-500/20 text-center backdrop-blur-sm"><div class="text-6xl font-black text-amber-400">+189%</div><div class="text-slate-200 text-sm font-medium">pipeline growth YoY</div><div class="w-full h-px bg-white/15 my-6"></div><div class="grid grid-cols-2 gap-5"><div><span class="text-white font-black text-2xl">0%</span><div class="text-slate-300 text-xs font-medium">fraud leads</div></div><div><span class="text-white font-black text-2xl">$28M+</span><div class="text-slate-300 text-xs font-medium">largest project</div></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS (short) -->
+<!-- TESTIMONIALS -->
 <section id="testimonials" class="py-24 px-6">
-  <div class="max-w-7xl mx-auto"><div class="text-center mb-14 reveal-on-scroll"><h2 class="text-4xl font-black text-white">C‑suite endorsement</h2><p class="text-slate-200 mt-2">Elite roofing executives on NorthSky</p></div>
-    <div class="grid md:grid-cols-2 gap-8"><div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="text-slate-100 italic">“Exclusive territories tripled our conversion. Game‑changing.”</p><div class="mt-6 flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold">JD</div><div><div class="font-black text-white">Jessica Delgado</div><div class="text-xs text-slate-300">VP Ops, Summit Exteriors</div></div></div></div>
-      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="text-slate-100 italic">“Added $2.1M in incremental revenue. Gold standard.”</p><div class="mt-6 flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold">MC</div><div><div class="font-black text-white">Marcus Chen</div><div class="text-xs text-slate-300">CEO, Apex Roofing Group</div></div></div></div>
+  <div class="max-w-7xl mx-auto"><div class="text-center mb-14 reveal-on-scroll"><h2 class="text-4xl font-black text-white">C‑suite endorsement</h2><p class="text-slate-200 mt-2 font-medium">Elite roofing executives on NorthSky</p></div>
+    <div class="grid md:grid-cols-2 gap-8"><div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="text-slate-100 italic font-medium">“Exclusive territories tripled our conversion. Game‑changing.”</p><div class="mt-6 flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold">JD</div><div><div class="font-black text-white">Jessica Delgado</div><div class="text-xs text-slate-300 font-medium">VP Ops, Summit Exteriors</div></div></div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll"><div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="text-slate-100 italic font-medium">“Added $2.1M in incremental revenue. Gold standard.”</p><div class="mt-6 flex items-center gap-3"><div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold">MC</div><div><div class="font-black text-white">Marcus Chen</div><div class="text-xs text-slate-300 font-medium">CEO, Apex Roofing Group</div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section id="pricing" class="py-20 px-6">
-  <div class="max-w-7xl mx-auto"><div class="text-center mb-12 reveal-on-scroll"><h2 class="text-4xl lg:text-5xl font-black text-white">Private pricing · Enterprise terms</h2><p class="text-slate-200 text-lg">Scalable investment, white‑glove execution</p></div>
-    <div class="grid md:grid-cols-3 gap-7"><div class="glass-premium p-7 rounded-2xl text-center reveal-on-scroll"><div class="text-cyan-300 font-bold text-sm">SCALE PACK</div><div class="text-4xl font-black mt-2 text-white">$349<span class="text-sm text-slate-300">/mo</span></div><div class="text-slate-300 text-sm">up to 75 verified leads</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Territory lock + AI scoring</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Native CRM sync</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Priority email support</li></ul><button onclick="openDemoModal()" class="mt-8 w-full border border-cyan-500/40 rounded-xl py-2.5 font-semibold text-white hover:bg-cyan-500/20 transition">Enroll</button></div>
-      <div class="glass-premium p-7 rounded-2xl border-t-2 border-amber-400 shadow-2xl relative reveal-on-scroll"><div class="absolute -top-3 left-1/2 transform -translate-x-1/2 badge-gold text-black text-xs font-black px-3 py-1 rounded-full uppercase">ELITE CHOICE</div><div class="text-amber-300 font-bold mt-2">COMMAND</div><div class="text-4xl font-black mt-2 text-white">$899<span class="text-sm text-slate-300">/mo</span></div><div class="text-slate-300 text-sm">up to 250 verified leads</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Expanded territory conquest</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Live analytics + heatmaps</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Dedicated client strategist</li></ul><button onclick="openDemoModal()" class="mt-8 w-full btn-million rounded-xl py-2.5 font-bold shadow-lg">Start Command Plan</button></div>
-      <div class="glass-premium p-7 rounded-2xl text-center reveal-on-scroll"><div class="text-amber-300 font-bold">CONCIERGE</div><div class="text-4xl font-black mt-2 text-white">$2,499<span class="text-sm text-slate-300">/mo</span></div><div class="text-slate-300 text-sm">unlimited leads + SLA</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Unlimited territories & users</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> API platinum access</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Quarterly strategy session</li></ul><button onclick="openDemoModal()" class="mt-8 w-full border border-amber-500/60 rounded-xl py-2.5 font-semibold text-white hover:bg-amber-500/20 transition">Talk to concierge</button></div>
+  <div class="max-w-7xl mx-auto"><div class="text-center mb-12 reveal-on-scroll"><h2 class="text-4xl lg:text-5xl font-black text-white">Private pricing · Enterprise terms</h2><p class="text-slate-200 text-lg font-medium">Scalable investment, white‑glove execution</p></div>
+    <div class="grid md:grid-cols-3 gap-7"><div class="glass-premium p-7 rounded-2xl text-center reveal-on-scroll"><div class="text-cyan-300 font-bold text-sm">SCALE PACK</div><div class="text-4xl font-black mt-2 text-white">$349<span class="text-base text-slate-300">/mo</span></div><div class="text-slate-300 text-sm font-medium">up to 75 verified leads</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Territory lock + AI scoring</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Native CRM sync</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Priority email support</li></ul><button onclick="openDemoModal()" class="mt-8 w-full border border-cyan-500/40 rounded-xl py-2.5 font-semibold text-white hover:bg-cyan-500/20 transition">Enroll</button></div>
+      <div class="glass-premium p-7 rounded-2xl border-t-2 border-amber-400 shadow-2xl relative reveal-on-scroll"><div class="absolute -top-3 left-1/2 transform -translate-x-1/2 badge-gold text-black text-xs font-black px-3 py-1 rounded-full uppercase">ELITE CHOICE</div><div class="text-amber-300 font-bold mt-2">COMMAND</div><div class="text-4xl font-black mt-2 text-white">$899<span class="text-base text-slate-300">/mo</span></div><div class="text-slate-300 text-sm font-medium">up to 250 verified leads</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Expanded territory conquest</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Live analytics + heatmaps</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Dedicated client strategist</li></ul><button onclick="openDemoModal()" class="mt-8 w-full btn-million rounded-xl py-2.5 font-bold shadow-lg">Start Command Plan</button></div>
+      <div class="glass-premium p-7 rounded-2xl text-center reveal-on-scroll"><div class="text-amber-300 font-bold">CONCIERGE</div><div class="text-4xl font-black mt-2 text-white">$2,499<span class="text-base text-slate-300">/mo</span></div><div class="text-slate-300 text-sm font-medium">unlimited leads + SLA</div><ul class="mt-6 space-y-2 text-sm text-slate-200 text-left"><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Unlimited territories & users</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> API platinum access</li><li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Quarterly strategy session</li></ul><button onclick="openDemoModal()" class="mt-8 w-full border border-amber-500/60 rounded-xl py-2.5 font-semibold text-white hover:bg-amber-500/20 transition">Talk to concierge</button></div>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section class="py-20 px-6"><div class="max-w-4xl mx-auto glass-premium rounded-3xl p-10 text-center border border-amber-500/40 reveal-on-scroll"><i class="fa-regular fa-gem text-amber-400 text-5xl mb-4"></i><h2 class="text-3xl md:text-5xl font-black text-white">Ready to claim your pipeline dominance?</h2><p class="text-slate-200 mt-3 max-w-lg mx-auto">Join the roofing enterprises that replaced legacy marketplaces.</p><div class="mt-8 flex flex-col sm:flex-row gap-5 justify-center"><button onclick="openDemoModal()" class="btn-million px-8 py-4 rounded-xl font-bold text-white text-lg shadow-2xl"><i class="fa-regular fa-calendar-star mr-2"></i> Book executive demo</button><button onclick="openDemoModal()" class="glass-premium px-8 py-4 rounded-xl font-semibold text-white border border-white/20">Talk to specialist</button></div><p class="text-xs text-slate-300 mt-6">✓ No commitment · 45‑min deep dive</p></div></section>
+<section class="py-20 px-6"><div class="max-w-4xl mx-auto glass-premium rounded-3xl p-10 text-center border border-amber-500/40 reveal-on-scroll"><i class="fa-regular fa-gem text-amber-400 text-5xl mb-4"></i><h2 class="text-3xl md:text-5xl font-black text-white">Ready to claim your pipeline dominance?</h2><p class="text-slate-200 mt-3 max-w-lg mx-auto font-medium">Join the roofing enterprises that replaced legacy marketplaces.</p><div class="mt-8 flex flex-col sm:flex-row gap-5 justify-center"><button onclick="openDemoModal()" class="btn-million px-8 py-4 rounded-xl font-bold text-white text-lg shadow-2xl"><i class="fa-regular fa-calendar-star mr-2"></i> Book executive demo</button><button onclick="openDemoModal()" class="glass-premium px-8 py-4 rounded-xl font-semibold text-white border border-white/20">Talk to specialist</button></div><p class="text-xs text-muted-contrast mt-6 font-medium">✓ No commitment · 45‑min deep dive</p></div></section>
 
-<!-- MODAL (unchanged) -->
+<!-- MODAL -->
 <div id="demoModal" class="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-[100] opacity-0 invisible transition-all duration-300" onclick="if(event.target===this) closeDemoModal()">
-  <div class="bg-[#0A0F1F] border border-amber-500/40 rounded-2xl max-w-md w-full mx-4 p-8 shadow-2xl transform transition-all"><div class="flex justify-between items-center mb-5"><h3 class="text-2xl font-black text-white flex gap-2"><i class="fa-regular fa-crown text-amber-400"></i> VIP Demo Request</h3><button onclick="closeDemoModal()" class="text-slate-300 hover:text-amber-300 text-2xl">&times;</button></div><p class="text-slate-200 text-sm mb-6">Secure your pipeline walkthrough — a strategy leader will respond within 60 minutes.</p><form id="demoForm"><div class="mb-4"><input type="text" id="demoName" placeholder="Full name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><div class="mb-4"><input type="email" id="demoEmail" placeholder="Business email" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><div class="mb-4"><input type="text" id="demoCompany" placeholder="Company name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><button type="submit" class="w-full btn-million py-3 rounded-xl font-bold text-white shadow-xl">Request VIP access →</button><p class="text-[10px] text-center text-slate-400 mt-4">By submitting, you agree to receive a confidential strategy overview.</p></form></div>
+  <div class="bg-[#0A0F1F] border border-amber-500/40 rounded-2xl max-w-md w-full mx-4 p-8 shadow-2xl transform transition-all"><div class="flex justify-between items-center mb-5"><h3 class="text-2xl font-black text-white flex gap-2"><i class="fa-regular fa-crown text-amber-400"></i> VIP Demo Request</h3><button onclick="closeDemoModal()" class="text-slate-300 hover:text-amber-300 text-2xl">&times;</button></div><p class="text-slate-200 text-sm mb-6 font-medium">Secure your pipeline walkthrough — a strategy leader will respond within 60 minutes.</p><form id="demoForm"><div class="mb-4"><input type="text" id="demoName" placeholder="Full name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><div class="mb-4"><input type="email" id="demoEmail" placeholder="Business email" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><div class="mb-4"><input type="text" id="demoCompany" placeholder="Company name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400"></div><button type="submit" class="w-full btn-million py-3 rounded-xl font-bold text-white shadow-xl">Request VIP access →</button><p class="text-[10px] text-center text-slate-400 mt-4">By submitting, you agree to receive a confidential strategy overview.</p></form></div>
 </div>
 
 <script>
-  // LIVE FEED DATA (same as original)
   const leadSamples = [
     { title: "🔥 Emergency Roof Replacement", location: "Austin, TX", value: "$27,400", tag: "Priority Verified" },
     { title: "Storm Damage Insurance Claim", location: "Denver, CO", value: "$22,300", tag: "Pre‑approved" },
@@ -366,12 +359,11 @@
   function renderFeed() {
     const container = document.getElementById('liveFeedContainer');
     if(!container) return;
-    container.innerHTML = displayedLeads.map(lead => `<div class="live-item-premium rounded-xl p-3"><div class="flex justify-between items-start"><div class="font-bold text-white text-sm">${lead.title}</div><span class="text-[9px] bg-gradient-to-r from-amber-500/40 to-cyan-500/40 text-white px-2 py-0.5 rounded-full">${lead.tag}</span></div><div class="text-xs text-slate-300 mt-1 flex gap-3"><span><i class="fa-regular fa-location-dot"></i> ${lead.location}</span><span><i class="fa-regular fa-tag"></i> Est. ${lead.value}</span></div><div class="flex justify-between items-center mt-2"><span class="text-[10px] text-amber-300"><i class="fa-regular fa-clock"></i> ${Math.floor(Math.random()*7)+1} min ago</span><span class="text-[10px] font-black text-cyan-300">✓ AI VERIFIED</span></div></div>`).join('');
+    container.innerHTML = displayedLeads.map(lead => `<div class="live-item-premium rounded-xl p-3"><div class="flex justify-between items-start"><div class="font-bold text-white text-sm">${lead.title}</div><span class="text-[9px] bg-gradient-to-r from-amber-500/40 to-cyan-500/40 text-white px-2 py-0.5 rounded-full font-bold">${lead.tag}</span></div><div class="text-xs text-slate-200 mt-1 flex gap-3 font-medium"><span><i class="fa-regular fa-location-dot"></i> ${lead.location}</span><span><i class="fa-regular fa-tag"></i> Est. ${lead.value}</span></div><div class="flex justify-between items-center mt-2"><span class="text-[10px] text-amber-300 font-medium"><i class="fa-regular fa-clock"></i> ${Math.floor(Math.random()*7)+1} min ago</span><span class="text-[10px] font-black text-cyan-300">✓ AI VERIFIED</span></div></div>`).join('');
   }
   function addNewLead() { const randomLead = leadSamples[Math.floor(Math.random()*leadSamples.length)]; const newLead = { ...randomLead, tag: randomLead.tag + " ⚡" }; displayedLeads.unshift(newLead); if(displayedLeads.length>5) displayedLeads.pop(); renderFeed(); }
   renderFeed(); setInterval(addNewLead, 7500);
 
-  // MODAL LOGIC
   const modal = document.getElementById('demoModal');
   function openDemoModal() { modal.classList.remove('opacity-0','invisible'); modal.classList.add('opacity-100','visible'); document.body.style.overflow='hidden'; }
   function closeDemoModal() { modal.classList.add('opacity-0','invisible'); modal.classList.remove('opacity-100','visible'); document.body.style.overflow=''; }
@@ -379,16 +371,13 @@
   const demoForm = document.getElementById('demoForm');
   if(demoForm) { demoForm.addEventListener('submit', function(e) { e.preventDefault(); const name = document.getElementById('demoName')?.value; const email = document.getElementById('demoEmail')?.value; const company = document.getElementById('demoCompany')?.value; if(!name || !email || !company) { alert("Please complete all VIP fields."); return; } alert(`✨ Thank you ${name} from ${company}. A NorthSky pipeline architect will reach out within 60 minutes.`); closeDemoModal(); demoForm.reset(); }); }
 
-  // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { const href = this.getAttribute('href'); if(href==="#" || !href) return; const target = document.querySelector(href); if(target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); } }); });
 
-  // REVEAL ON SCROLL
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('revealed'); }); }, { threshold:0.1 });
   revealElements.forEach(el => observer.observe(el));
   setTimeout(() => { revealElements.forEach(el => el.classList.add('revealed')); }, 100);
 
-  // DARK / LIGHT MODE TOGGLE with localStorage
   const toggleBtn = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
   function setTheme(theme) {
