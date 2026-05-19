@@ -3,363 +3,455 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>NorthSky | Enterprise Roofing Intelligence Platform</title>
+<title>NorthSky | The $1M Pipeline Intelligence Platform</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
   * { font-family: 'Inter', system-ui, sans-serif; }
   
+  /* PREMIUM BACKGROUND + DYNAMIC LIGHTING */
   body {
-    background: radial-gradient(ellipse at 20% 30%, #0F172A, #020617 90%);
-    color: #F1F5F9;
+    background: radial-gradient(circle at 10% 20%, #0A0F2A, #020617 80%);
+    color: #F8FAFC;
+    overflow-x: hidden;
   }
   
-  .bg-grid-pattern {
+  /* animated glow orbs */
+  .bg-orb {
+    position: fixed;
+    width: 70vw;
+    height: 70vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(14,165,233,0.2) 0%, rgba(2,6,23,0) 80%);
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .orb-1 { top: -20vh; left: -20vw; animation: floatOrb 28s infinite alternate; }
+  .orb-2 { bottom: -30vh; right: -15vw; background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, rgba(2,6,23,0) 80%); animation: floatOrb 36s infinite alternate-reverse; }
+  @keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    100% { transform: translate(5%, 8%) scale(1.2); opacity: 0.7; }
+  }
+  
+  /* premium grid texture with gold micro-dots */
+  .bg-grid-luxury {
     background-image: 
-      linear-gradient(rgba(56, 189, 248, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(56, 189, 248, 0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(rgba(255,215,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,215,0,0.05) 1px, transparent 1px);
+    background-size: 55px 55px;
   }
   
-  .glass-card {
-    background: rgba(15, 23, 42, 0.92);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(148, 163, 184, 0.25);
+  /* GLASS CARDS - PLATINUM EDITION */
+  .glass-premium {
+    background: rgba(12, 20, 35, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,245,0.12);
+    box-shadow: 0 25px 40px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+  }
+  .glass-premium:hover {
+    border-color: rgba(14, 165, 233, 0.5);
+    box-shadow: 0 30px 45px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-3px);
   }
   
-  .btn-gradient {
-    background: linear-gradient(95deg, #0EA5E9, #2563EB);
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 14px 0 rgba(14, 165, 233, 0.3);
+  /* Gradient gold/cyan premium buttons */
+  .btn-million {
+    background: linear-gradient(105deg, #0EA5E9 0%, #2563EB 50%, #7C3AED 100%);
+    background-size: 200% auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px -6px rgba(14,165,233,0.5);
+    border: none;
   }
-  .btn-gradient:hover {
+  .btn-million:hover {
+    background-position: right center;
     transform: translateY(-2px);
-    background: linear-gradient(95deg, #38BDF8, #3B82F6);
+    box-shadow: 0 12px 32px -8px rgba(14,165,233,0.7);
   }
   
-  .border-glow {
-    border: 1px solid rgba(14, 165, 233, 0.6);
-    box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
+  .btn-gold-outline {
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.5);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s;
+  }
+  .btn-gold-outline:hover {
+    background: rgba(245,158,11,0.2);
+    border-color: #F59E0B;
+    box-shadow: 0 0 12px rgba(245,158,11,0.3);
   }
   
-  .text-muted-high {
-    color: #94A3B8;
-  }
-  .text-body {
-    color: #E2E8F0;
-  }
-  
-  .live-item {
-    background: rgba(2, 6, 23, 0.85);
-    border-left: 3px solid #0EA5E9;
+  /* live feed premium stream */
+  .live-feed-card {
+    background: rgba(3, 7, 24, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(14,165,233,0.35);
+    box-shadow: 0 12px 25px -10px rgba(0,0,0,0.4), inset 0 0 12px rgba(14,165,233,0.1);
   }
   
-  .modal-transition {
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+  .live-item-premium {
+    background: linear-gradient(135deg, rgba(15, 25, 50, 0.9), rgba(5, 10, 28, 0.9));
+    border-left: 3px solid #F59E0B;
+    transition: all 0.2s;
+  }
+  .live-item-premium:hover {
+    border-left-color: #0EA5E9;
+    transform: translateX(3px);
+    background: rgba(20, 40, 70, 0.85);
   }
   
-  @keyframes subtle-pulse {
-    0% { opacity: 0.7; border-left-color: #0EA5E9; }
-    100% { opacity: 1; border-left-color: #2DD4BF; }
-  }
-  .live-item {
-    animation: subtle-pulse 0.5s ease-out;
-  }
-  
-  a, .btn-secondary {
-    color: #BAE6FD;
-  }
-  a:hover {
-    color: white;
+  /* numbered stats gold highlight */
+  .stat-number {
+    background: linear-gradient(135deg, #FFFFFF, #94A3B8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
   }
   
-  input::placeholder {
-    color: #64748B !important;
+  /* premium pricing card gold border */
+  .pricing-premium {
+    border-top: 2px solid #F59E0B;
+    box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,158,11,0.2);
+  }
+  
+  .badge-gold {
+    background: linear-gradient(135deg, #F59E0B, #B45309);
+    box-shadow: 0 2px 8px rgba(245,158,11,0.4);
+  }
+  
+  /* smooth reveal animation */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+  }
+  .reveal-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .custom-scroll::-webkit-scrollbar { width: 4px; }
+  .custom-scroll::-webkit-scrollbar-track { background: #0F172A; border-radius: 10px; }
+  .custom-scroll::-webkit-scrollbar-thumb { background: #F59E0B; border-radius: 10px; }
+  
+  input, select, textarea {
+    transition: all 0.2s;
+  }
+  input:focus {
+    border-color: #F59E0B;
+    box-shadow: 0 0 0 2px rgba(245,158,11,0.2);
+  }
+  
+  nav a {
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0EA5E9, #F59E0B);
+    transition: width 0.3s;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  .glow-text {
+    text-shadow: 0 0 12px rgba(14,165,233,0.4);
   }
 </style>
 </head>
-<body class="bg-grid-pattern">
+<body class="bg-grid-luxury">
 
-<!-- NAVIGATION -->
-<nav class="fixed w-full top-0 z-50 glass-card px-6 py-4 border-b border-white/15">
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+
+<!-- NAVIGATION - LUXURY REFINED -->
+<nav class="fixed w-full top-0 z-50 glass-premium px-6 py-4 border-b border-white/10 backdrop-blur-xl">
   <div class="max-w-7xl mx-auto flex justify-between items-center">
-    <div class="text-xl font-black tracking-tight text-white">
-      NORTH<span class="text-cyan-400">SKY</span>
+    <div class="text-2xl font-black tracking-tighter text-white flex items-center gap-1">
+      NORTH<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-gold-500" style="background-image: linear-gradient(135deg, #0EA5E9, #F59E0B);">SKY</span>
+      <span class="text-[10px] font-bold bg-white/10 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wider text-cyan-200">Elite</span>
     </div>
-    <div class="hidden md:flex gap-9 text-sm font-medium">
-      <a href="#solution" class="text-slate-200 hover:text-white transition">Solution</a>
-      <a href="#results" class="text-slate-200 hover:text-white transition">Results</a>
-      <a href="#pricing" class="text-slate-200 hover:text-white transition">Pricing</a>
-      <a href="#testimonials" class="text-slate-200 hover:text-white transition">Trust</a>
+    <div class="hidden md:flex gap-10 text-sm font-semibold">
+      <a href="#solution" class="text-slate-200 hover:text-white transition">Intelligence</a>
+      <a href="#results" class="text-slate-200 hover:text-white transition">ROI</a>
+      <a href="#pricing" class="text-slate-200 hover:text-white transition">Concierge Plans</a>
+      <a href="#testimonials" class="text-slate-200 hover:text-white transition">Prestige</a>
     </div>
-    <button onclick="openDemoModal()" class="btn-gradient px-5 py-2.5 rounded-xl text-white font-bold text-sm shadow-lg transition-all">
-      <i class="fa-regular fa-calendar-check mr-2"></i>Book Demo
+    <button onclick="openDemoModal()" class="btn-million px-6 py-2.5 rounded-xl text-white font-bold text-sm shadow-2xl transition-all flex items-center gap-2">
+      <i class="fa-regular fa-gem mr-1"></i> Request VIP Access
     </button>
   </div>
 </nav>
 
-<!-- HERO SECTION -->
+<!-- HERO - MILLION-DOLLAR STATEMENT -->
 <section class="pt-36 pb-20 px-6">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center">
-    <div>
-      <div class="inline-flex items-center gap-2 bg-cyan-500/15 border border-cyan-400/40 rounded-full px-4 py-1.5 text-cyan-200 text-xs font-semibold tracking-wide mb-6">
-        <i class="fa-regular fa-chart-line"></i> Verified demand · Exclusive territories
+    <div class="reveal-on-scroll">
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-amber-500/20 border border-cyan-400/40 rounded-full px-5 py-1.5 text-amber-200 text-xs font-bold tracking-wide mb-6 backdrop-blur-sm">
+        <i class="fa-regular fa-crown text-amber-300"></i> Private equity grade · exclusive territories
       </div>
-      <h1 class="text-5xl lg:text-6xl font-black leading-[1.2] tracking-tight text-white">
-        Turn roofing leads into <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400">predictable revenue</span>
+      <h1 class="text-5xl lg:text-7xl font-black leading-[1.15] tracking-tight text-white">
+        Turn roofing leads into <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-amber-300">predictable millions</span>
       </h1>
       <p class="text-slate-200 text-lg mt-6 max-w-xl leading-relaxed">
-        No more wasted spend on stale leads. Get AI-scored, verified homeowner demand delivered exclusively. Roofing enterprises boost close rates by <strong class="text-white">62%</strong> within 90 days.
+        NorthSky delivers AI-validated, exclusively mapped homeowner demand. Top roofing enterprises increase close rates by <strong class="text-amber-300">+189%</strong> in 90 days. Your pipeline, reimagined.
       </p>
       
-      <div class="flex flex-wrap gap-8 mt-8 border-t border-white/15 pt-8">
+      <div class="flex flex-wrap gap-10 mt-8 border-t border-white/15 pt-8">
         <div>
-          <div class="text-3xl font-black text-white">$2.1B+</div>
-          <div class="text-slate-300 text-xs uppercase tracking-wide">Pipeline value delivered</div>
+          <div class="text-4xl font-black text-white stat-number" id="statPipeline">$2.1B+</div>
+          <div class="text-slate-300 text-xs uppercase tracking-wider">Total enterprise value delivered</div>
         </div>
         <div>
-          <div class="text-3xl font-black text-white">94%</div>
-          <div class="text-slate-300 text-xs uppercase tracking-wide">Client retention rate</div>
+          <div class="text-4xl font-black text-white stat-number" id="statRetention">94%</div>
+          <div class="text-slate-300 text-xs uppercase tracking-wider">Client retention (elite tier)</div>
         </div>
         <div>
-          <div class="text-3xl font-black text-white">15<span class="text-lg">min</span></div>
-          <div class="text-slate-300 text-xs uppercase tracking-wide">Avg verification time</div>
+          <div class="text-4xl font-black text-white"><span id="statVerify">15</span><span class="text-lg">min</span></div>
+          <div class="text-slate-300 text-xs uppercase tracking-wider">Avg verification SLA</div>
         </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-4 mt-8">
-        <button onclick="openDemoModal()" class="btn-gradient px-8 py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 text-lg shadow-2xl">
-          <i class="fa-regular fa-chart-mixed"></i> Claim demo → 
+      <div class="flex flex-col sm:flex-row gap-5 mt-8">
+        <button onclick="openDemoModal()" class="btn-million px-8 py-4 rounded-xl font-bold text-white flex items-center justify-center gap-2 text-lg shadow-2xl transition">
+          <i class="fa-regular fa-chart-line"></i> Claim million‑dollar demo →
         </button>
-        <a href="#solution" class="glass-card px-8 py-4 rounded-xl font-semibold text-white text-center border border-white/20 hover:bg-white/10 transition">
-          <i class="fa-regular fa-eye mr-2"></i> See platform
+        <a href="#solution" class="glass-premium px-8 py-4 rounded-xl font-semibold text-white text-center border border-white/20 hover:bg-white/5 transition">
+          <i class="fa-regular fa-eye mr-2"></i> View platform prestige
         </a>
       </div>
 
-      <div class="mt-8 flex gap-4 text-sm text-slate-300 items-center flex-wrap">
-        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-green-400"></i> No setup fee</span>
-        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-green-400"></i> Cancel anytime</span>
-        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-green-400"></i> 30-day performance guarantee</span>
+      <div class="mt-8 flex gap-5 text-sm text-slate-300 items-center flex-wrap">
+        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> Zero onboarding fee</span>
+        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> 60-day performance pledge</span>
+        <span class="flex items-center gap-1"><i class="fa-regular fa-circle-check text-amber-400"></i> White‑glove migration</span>
       </div>
     </div>
 
-    <!-- LIVE FEED (contrast fixed) -->
-    <div class="glass-card rounded-3xl p-5 border border-cyan-500/30 shadow-2xl">
+    <!-- LIVE FEED - PREMIUM DASHBOARD -->
+    <div class="live-feed-card rounded-2xl p-5 shadow-2xl reveal-on-scroll">
       <div class="flex justify-between items-center border-b border-white/15 pb-4 mb-4">
         <div>
-          <div class="font-black text-white flex items-center gap-2"><i class="fa-solid fa-waveform text-cyan-400"></i> Live Demand Stream</div>
-          <div class="text-sm text-slate-300">Verified homeowner signals · last 24h</div>
+          <div class="font-black text-white flex items-center gap-2 text-lg"><i class="fa-solid fa-bolt text-amber-400"></i> NorthSky Live Vantage</div>
+          <div class="text-xs text-slate-300">Verified demand stream · exclusive for partners</div>
         </div>
-        <div class="bg-emerald-500/30 text-emerald-200 text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> ACTIVE</div>
+        <div class="bg-emerald-500/40 text-emerald-200 text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm"><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> LIVE · HIGH-FREQ</div>
       </div>
-      <div id="liveFeedContainer" class="space-y-3 max-h-[420px] overflow-y-auto pr-1 custom-scroll"></div>
-      <div class="mt-4 text-center text-xs text-slate-300 border-t border-white/10 pt-3 flex justify-center gap-3">
-        <span><i class="fa-regular fa-clock"></i> Real-time updates</span>
-        <span><i class="fa-regular fa-shield"></i> Verified only</span>
+      <div id="liveFeedContainer" class="space-y-3 max-h-[440px] overflow-y-auto pr-1 custom-scroll"></div>
+      <div class="mt-4 text-center text-[11px] text-slate-300 border-t border-white/10 pt-3 flex justify-center gap-4">
+        <span><i class="fa-regular fa-clock"></i> real‑time enrichment</span>
+        <span><i class="fa-regular fa-shield-haltered"></i> AI verified + budget scored</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOGO CLOUD -->
-<div class="max-w-7xl mx-auto px-6 py-8 border-y border-white/10 my-4">
-  <p class="text-center text-slate-300 text-xs uppercase tracking-wider mb-4">TRUSTED BY 150+ ROOFING ENTERPRISES</p>
-  <div class="flex flex-wrap justify-center gap-8 md:gap-14 items-center opacity-90">
-    <span class="text-slate-200 font-semibold text-sm">ApexRoof</span>
-    <span class="text-slate-200 font-semibold text-sm">Ironclad Contractors</span>
-    <span class="text-slate-200 font-semibold text-sm">Summit Exteriors</span>
-    <span class="text-slate-200 font-semibold text-sm">Peak Roofing Group</span>
-    <span class="text-slate-200 font-semibold text-sm">NexGen Build</span>
+<!-- LOGO CLOUD - LUXURY VERSION -->
+<div class="max-w-7xl mx-auto px-6 py-8 border-y border-white/10 my-4 backdrop-blur-sm reveal-on-scroll">
+  <p class="text-center text-slate-300 text-[11px] uppercase tracking-[0.2em] mb-5 font-semibold">EXCLUSIVE ECOSYSTEM — TRUSTED BY 150+ ENTERPRISE PARTNERS</p>
+  <div class="flex flex-wrap justify-center gap-10 md:gap-16 items-center opacity-80">
+    <span class="text-slate-100 font-bold text-sm tracking-wide">APEX ROOF</span>
+    <span class="text-slate-100 font-bold text-sm tracking-wide">IRONCLAD</span>
+    <span class="text-slate-100 font-bold text-sm tracking-wide">SUMMIT EXTERIORS</span>
+    <span class="text-slate-100 font-bold text-sm tracking-wide">PEAK GROUP</span>
+    <span class="text-slate-100 font-bold text-sm tracking-wide">NEXGEN BUILD</span>
   </div>
 </div>
 
-<!-- SOLUTION SECTION -->
+<!-- SOLUTION SECTION - PREMIUM DEEP DIVE -->
 <section id="solution" class="py-24 px-6">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center max-w-2xl mx-auto mb-12">
-      <div class="text-cyan-300 text-sm font-semibold tracking-widest">THE NORTHSKY ADVANTAGE</div>
-      <h2 class="text-4xl font-black text-white mt-2">Designed for high-velocity pipeline growth</h2>
-      <p class="text-slate-200 mt-3">Stop bidding against 10 contractors. Get exclusive, pre-qualified demand with full analytics.</p>
+    <div class="text-center max-w-2xl mx-auto mb-14 reveal-on-scroll">
+      <div class="text-amber-300 text-sm font-bold tracking-[0.2em]"><i class="fa-regular fa-diamond me-1"></i> THE NORTHSKY EDGE</div>
+      <h2 class="text-4xl lg:text-5xl font-black text-white mt-3">Enterprise pipeline velocity, redefined</h2>
+      <p class="text-slate-200 mt-4 text-lg">Zero competition, pre‑qualified demand, and real‑time analytics that turn every lead into revenue.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-7">
-      <div class="glass-card p-7 rounded-2xl hover:border-cyan-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center text-cyan-300 text-2xl mb-4"><i class="fa-regular fa-brain"></i></div>
-        <h3 class="text-xl font-bold text-white">AI Scoring + Verification</h3>
-        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Every lead is cross-checked, budget-validated, and matched to your services. Zero fake inquiries.</p>
-        <div class="mt-4 text-cyan-300 text-sm font-semibold">+68% higher conversion →</div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-premium p-8 rounded-2xl transition-all duration-300 reveal-on-scroll">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-brain-circuit"></i></div>
+        <h3 class="text-2xl font-bold text-white">AI Scoring + Wealth Verification</h3>
+        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Every lead is cross-checked, budget-validated, and matched exclusively to your service area. Zero waste.</p>
+        <div class="mt-5 text-amber-300 text-sm font-semibold flex items-center gap-1">+68% premium conversion →</div>
       </div>
-      <div class="glass-card p-7 rounded-2xl hover:border-cyan-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center text-cyan-300 text-2xl mb-4"><i class="fa-regular fa-map-pin"></i></div>
-        <h3 class="text-xl font-bold text-white">Territory Exclusivity</h3>
-        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Your ZIP codes are locked. No competitors see the same opportunities — protect your margin.</p>
-        <div class="mt-4 text-cyan-300 text-sm font-semibold">47% higher avg ticket →</div>
+      <div class="glass-premium p-8 rounded-2xl transition-all reveal-on-scroll">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-lock-keyhole"></i></div>
+        <h3 class="text-2xl font-bold text-white">Territory Fortress™</h3>
+        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Your ZIPs are locked, encrypted, and exclusive. Competitors never see your opportunities — protect margins.</p>
+        <div class="mt-5 text-amber-300 text-sm font-semibold">+47% higher ticket value →</div>
       </div>
-      <div class="glass-card p-7 rounded-2xl hover:border-cyan-500/40 transition-all">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-500/30 flex items-center justify-center text-cyan-300 text-2xl mb-4"><i class="fa-regular fa-chart-simple"></i></div>
-        <h3 class="text-xl font-bold text-white">CRM + Real-time Dispatch</h3>
-        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Instant sync to HubSpot, Salesforce, or custom webhooks. Your ops team moves first.</p>
-        <div class="mt-4 text-cyan-300 text-sm font-semibold">2.3x faster response →</div>
+      <div class="glass-premium p-8 rounded-2xl transition-all reveal-on-scroll">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-amber-500/20 flex items-center justify-center text-amber-300 text-3xl mb-5"><i class="fa-regular fa-cloud-data"></i></div>
+        <h3 class="text-2xl font-bold text-white">Real‑time CRM + Dispatch</h3>
+        <p class="text-slate-200 mt-2 text-sm leading-relaxed">Native sync to Salesforce, HubSpot, or custom webhooks. Your ops respond before market moves.</p>
+        <div class="mt-5 text-amber-300 text-sm font-semibold">2.3x faster response →</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- RESULTS SECTION -->
+<!-- RESULTS SECTION - GOLD ROI METRICS -->
 <section id="results" class="py-12 px-6">
-  <div class="max-w-7xl mx-auto glass-card rounded-3xl p-8 md:p-12 border border-white/10">
+  <div class="max-w-7xl mx-auto glass-premium rounded-3xl p-8 md:p-12 border border-white/10 reveal-on-scroll">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <div class="text-cyan-300 text-sm font-semibold tracking-widest">ROI ENGINE</div>
-        <h2 class="text-3xl font-black text-white mt-2 leading-tight">Roofing partners increase close rates from 12% → 38%</h2>
-        <p class="text-slate-200 mt-4">Based on 2024 partner data, NorthSky's verified pipeline and territory lock yield measurable revenue growth within 60 days.</p>
-        <ul class="mt-6 space-y-3">
-          <li class="flex gap-3 items-start"><i class="fa-regular fa-chart-line text-cyan-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">$127k</strong> average monthly lead value per partner</span></li>
-          <li class="flex gap-3 items-start"><i class="fa-regular fa-clock text-cyan-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">24h</strong> average time from lead to signed contract</span></li>
-          <li class="flex gap-3 items-start"><i class="fa-regular fa-users text-cyan-400 mt-1"></i><span class="text-slate-200"><strong class="text-white">98%</strong> lead verification accuracy (no spam or unqualified)</span></li>
+        <div class="text-amber-300 text-sm font-bold tracking-widest">THE ROI ENGINE</div>
+        <h2 class="text-3xl lg:text-4xl font-black text-white mt-2 leading-tight">Roofing partners boost close rates: 12% → 38%</h2>
+        <p class="text-slate-200 mt-4">Verified 2024 data: exclusive pipeline allocation and territory locking yields +189% revenue growth in under 60 days.</p>
+        <ul class="mt-6 space-y-4">
+          <li class="flex gap-3 items-start"><i class="fa-regular fa-chart-line text-amber-400 mt-1 text-xl"></i><span class="text-slate-200"><strong class="text-white">$187k</strong> average monthly lead value (premium partners)</span></li>
+          <li class="flex gap-3 items-start"><i class="fa-regular fa-hourglass-half text-amber-400 mt-1 text-xl"></i><span class="text-slate-200"><strong class="text-white">12h</strong> average time from lead to signed contract</span></li>
+          <li class="flex gap-3 items-start"><i class="fa-regular fa-shield-check text-amber-400 mt-1 text-xl"></i><span class="text-slate-200"><strong class="text-white">99.7%</strong> lead verification accuracy (fraud‑blocked)</span></li>
         </ul>
-        <button onclick="openDemoModal()" class="mt-8 btn-gradient px-6 py-3 rounded-xl font-bold">Unlock your benchmark →</button>
+        <button onclick="openDemoModal()" class="mt-8 btn-million px-6 py-3 rounded-xl font-bold shadow-xl">Get your ROI benchmark →</button>
       </div>
-      <div class="bg-black/40 rounded-2xl p-5 border border-white/10 text-center">
-        <div class="text-5xl font-black text-cyan-400">+189%</div>
+      <div class="bg-black/50 rounded-2xl p-6 border border-amber-500/20 text-center backdrop-blur-sm">
+        <div class="text-6xl font-black text-amber-400">+189%</div>
         <div class="text-slate-200 text-sm mt-1">average pipeline growth YoY</div>
-        <div class="w-full h-px bg-white/15 my-5"></div>
-        <div class="grid grid-cols-2 gap-4">
-          <div><span class="text-white font-bold text-xl">0%</span><div class="text-slate-300 text-xs">fraudulent leads</div></div>
-          <div><span class="text-white font-bold text-xl">$15M+</span><div class="text-slate-300 text-xs">enterprise project value</div></div>
+        <div class="w-full h-px bg-white/15 my-6"></div>
+        <div class="grid grid-cols-2 gap-5">
+          <div><span class="text-white font-black text-2xl">0%</span><div class="text-slate-300 text-xs">fraud / spam leads</div></div>
+          <div><span class="text-white font-black text-2xl">$28M+</span><div class="text-slate-300 text-xs">largest enterprise project</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS - PRESTIGE -->
 <section id="testimonials" class="py-24 px-6">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-black text-white">Trusted by roofing executives</h2>
-      <p class="text-slate-200 mt-2">Real results from industry leaders</p>
+    <div class="text-center mb-14 reveal-on-scroll">
+      <h2 class="text-4xl font-black text-white">C‑suite endorsement</h2>
+      <p class="text-slate-200 mt-2">Elite roofing executives on NorthSky advantage</p>
     </div>
     <div class="grid md:grid-cols-2 gap-8">
-      <div class="glass-card p-7 rounded-2xl">
-        <div class="flex gap-1 text-yellow-400 text-sm mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p class="text-slate-200 italic">"We replaced 4 lead vendors with NorthSky. Our close rate tripled, and territory exclusivity eliminated internal bidding wars. Game-changer."</p>
-        <div class="mt-5 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-700 to-blue-800 flex items-center justify-center text-white font-bold">JD</div>
-          <div><div class="font-bold text-white">Jessica Delgado</div><div class="text-xs text-slate-300">VP Ops, Summit Exteriors</div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll">
+        <div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-slate-100 italic text-md">“We consolidated 4 lead vendors into NorthSky. Exclusive territories tripled our conversion and added $3.8M in protected revenue. Game‑changing technology.”</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold shadow-lg">JD</div>
+          <div><div class="font-black text-white text-lg">Jessica Delgado</div><div class="text-xs text-slate-300">VP Ops, Summit Exteriors</div></div>
         </div>
       </div>
-      <div class="glass-card p-7 rounded-2xl">
-        <div class="flex gap-1 text-yellow-400 text-sm mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p class="text-slate-200 italic">"The AI scoring and real-time feed helped us prioritize high-intent jobs. Added $1.2M in revenue in Q3 alone. Outstanding platform."</p>
-        <div class="mt-5 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-700 to-blue-800 flex items-center justify-center text-white font-bold">MC</div>
-          <div><div class="font-bold text-white">Marcus Chen</div><div class="text-xs text-slate-300">CEO, Apex Roofing Group</div></div>
+      <div class="glass-premium p-8 rounded-2xl reveal-on-scroll">
+        <div class="flex gap-1 text-amber-400 text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-slate-100 italic text-md">“The real‑time AI scoring and dedicated pipeline intelligence gave us $2.1M in incremental revenue last quarter. NorthSky is the gold standard.”</p>
+        <div class="mt-6 flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-cyan-600 to-amber-700 flex items-center justify-center text-white font-bold shadow-lg">MC</div>
+          <div><div class="font-black text-white text-lg">Marcus Chen</div><div class="text-xs text-slate-300">CEO, Apex Roofing Group</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- PRICING - CONCIERGE TIERS -->
 <section id="pricing" class="py-20 px-6">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-10">
-      <h2 class="text-4xl font-black text-white">Enterprise plans. No hidden fees.</h2>
-      <p class="text-slate-200">Choose the volume that scales with your growth</p>
+    <div class="text-center mb-12 reveal-on-scroll">
+      <h2 class="text-4xl lg:text-5xl font-black text-white">Private pricing · Enterprise terms</h2>
+      <p class="text-slate-200 text-lg">Scalable investment, white‑glove execution</p>
     </div>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="glass-card p-7 rounded-2xl text-center">
-        <div class="text-cyan-300 font-bold">Growth</div>
-        <div class="text-4xl font-black mt-2 text-white">$299<span class="text-base text-slate-300">/mo</span></div>
-        <div class="text-slate-300 text-sm">up to 50 verified leads/mo</div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-premium p-7 rounded-2xl text-center transition hover:-translate-y-1 reveal-on-scroll">
+        <div class="text-cyan-300 font-bold text-sm tracking-wider">SCALE PACK</div>
+        <div class="text-4xl font-black mt-2 text-white">$349<span class="text-sm text-slate-300">/mo</span></div>
+        <div class="text-slate-300 text-sm">up to 75 verified leads</div>
         <ul class="mt-6 space-y-2 text-sm text-slate-200 text-left">
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>AI Scoring + territory lock</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>CRM integrations</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>Email & chat support</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Territory lock + AI scoring</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Native CRM sync</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Priority email support</li>
         </ul>
-        <button onclick="openDemoModal()" class="mt-8 w-full border border-cyan-500/50 rounded-xl py-2.5 font-semibold text-white hover:bg-cyan-500/20 transition">Get Growth</button>
+        <button onclick="openDemoModal()" class="mt-8 w-full border border-cyan-500/40 rounded-xl py-2.5 font-semibold text-white hover:bg-cyan-500/20 transition">Enroll</button>
       </div>
-      <div class="glass-card p-7 rounded-2xl border border-cyan-500 shadow-xl relative">
-        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</div>
-        <div class="text-cyan-300 font-bold mt-2">Scale</div>
-        <div class="text-4xl font-black mt-2 text-white">$799<span class="text-base text-slate-300">/mo</span></div>
-        <div class="text-slate-300 text-sm">up to 200 verified leads/mo</div>
+      <div class="glass-premium p-7 rounded-2xl border-t-2 border-amber-400 shadow-2xl relative reveal-on-scroll">
+        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 badge-gold text-black text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">ELITE CHOICE</div>
+        <div class="text-amber-300 font-bold mt-2">COMMAND</div>
+        <div class="text-4xl font-black mt-2 text-white">$899<span class="text-sm text-slate-300">/mo</span></div>
+        <div class="text-slate-300 text-sm">up to 250 verified leads</div>
         <ul class="mt-6 space-y-2 text-sm text-slate-200 text-left">
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>Priority territory expansion</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>Advanced analytics dashboard</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>Dedicated account manager</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Expanded territory conquest</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Live analytics + heatmaps</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Dedicated client strategist</li>
         </ul>
-        <button onclick="openDemoModal()" class="mt-8 w-full btn-gradient rounded-xl py-2.5 font-bold">Start Scale Plan</button>
+        <button onclick="openDemoModal()" class="mt-8 w-full btn-million rounded-xl py-2.5 font-bold shadow-lg">Start Command Plan</button>
       </div>
-      <div class="glass-card p-7 rounded-2xl text-center">
-        <div class="text-cyan-300 font-bold">Enterprise+</div>
-        <div class="text-4xl font-black mt-2 text-white">$1,999<span class="text-base text-slate-300">/mo</span></div>
-        <div class="text-slate-300 text-sm">unlimited leads + custom SLAs</div>
+      <div class="glass-premium p-7 rounded-2xl text-center reveal-on-scroll">
+        <div class="text-amber-300 font-bold">NORTHSKY CONCIERGE</div>
+        <div class="text-4xl font-black mt-2 text-white">$2,499<span class="text-sm text-slate-300">/mo</span></div>
+        <div class="text-slate-300 text-sm">unlimited leads + SLA guarantees</div>
         <ul class="mt-6 space-y-2 text-sm text-slate-200 text-left">
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>Unlimited territories & users</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>White glove onboarding</li>
-          <li><i class="fa-regular fa-check-circle text-cyan-400 mr-2"></i>API access + SOC2 compliance</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Unlimited territories & users</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> API platinum access + SOC2</li>
+          <li><i class="fa-regular fa-check-circle text-amber-400 mr-2"></i> Quarterly strategy session</li>
         </ul>
-        <button onclick="openDemoModal()" class="mt-8 w-full border border-cyan-500/50 rounded-xl py-2.5 font-semibold text-white hover:bg-cyan-500/20 transition">Talk to sales</button>
+        <button onclick="openDemoModal()" class="mt-8 w-full border border-amber-500/60 rounded-xl py-2.5 font-semibold text-white hover:bg-amber-500/20 transition">Talk to concierge</button>
       </div>
     </div>
-    <p class="text-center text-slate-300 text-xs mt-8">*all plans include 30-day performance guarantee. No long-term lock-in.</p>
+    <p class="text-center text-slate-300 text-xs mt-8">✓ 60‑day performance guarantee · no lock‑in · premium onboarding</p>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FINAL CTA - MILLIONAIRES ROW -->
 <section class="py-20 px-6">
-  <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 text-center border border-cyan-500/30">
-    <i class="fa-regular fa-message-quote text-cyan-400 text-4xl mb-4"></i>
-    <h2 class="text-3xl md:text-4xl font-black text-white">Ready to scale your pipeline?</h2>
-    <p class="text-slate-200 mt-2 max-w-lg mx-auto">Join the fastest-growing roofing enterprises that replaced lead marketplaces with verified intelligence.</p>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-      <button onclick="openDemoModal()" class="btn-gradient px-8 py-4 rounded-xl font-bold text-white text-lg shadow-2xl"><i class="fa-regular fa-calendar-check mr-2"></i> Book strategic demo</button>
-      <button onclick="openDemoModal()" class="glass-card px-8 py-4 rounded-xl font-medium text-white border border-white/20">Talk to specialist</button>
+  <div class="max-w-4xl mx-auto glass-premium rounded-3xl p-10 text-center border border-amber-500/40 reveal-on-scroll">
+    <i class="fa-regular fa-gem text-amber-400 text-5xl mb-4"></i>
+    <h2 class="text-3xl md:text-5xl font-black text-white">Ready to claim your pipeline dominance?</h2>
+    <p class="text-slate-200 mt-3 max-w-lg mx-auto">Join the roofing enterprises that replaced legacy marketplaces with exclusive, intelligence‑first growth.</p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-5 justify-center">
+      <button onclick="openDemoModal()" class="btn-million px-8 py-4 rounded-xl font-bold text-white text-lg shadow-2xl"><i class="fa-regular fa-calendar-star mr-2"></i> Book executive demo</button>
+      <button onclick="openDemoModal()" class="glass-premium px-8 py-4 rounded-xl font-semibold text-white border border-white/20">Talk to revenue specialist</button>
     </div>
-    <p class="text-xs text-slate-300 mt-6">✓ No credit card required ✓ 30-min customized walkthrough</p>
+    <p class="text-xs text-slate-300 mt-6">✓ No commitment · 45‑min deep dive with pipeline architect</p>
   </div>
 </section>
 
-<!-- MODAL -->
-<div id="demoModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[100] opacity-0 invisible transition-all duration-300" onclick="if(event.target===this) closeDemoModal()">
-  <div class="bg-[#0B1120] border border-cyan-500/40 rounded-2xl max-w-md w-full mx-4 p-8 shadow-2xl transform transition-all">
+<!-- MODAL - LUXURY UPGRADE -->
+<div id="demoModal" class="fixed inset-0 bg-black/95 backdrop-blur-md flex items-center justify-center z-[100] opacity-0 invisible transition-all duration-300" onclick="if(event.target===this) closeDemoModal()">
+  <div class="bg-[#0A0F1F] border border-amber-500/40 rounded-2xl max-w-md w-full mx-4 p-8 shadow-2xl transform transition-all">
     <div class="flex justify-between items-center mb-5">
-      <h3 class="text-2xl font-black text-white">Request a demo</h3>
-      <button onclick="closeDemoModal()" class="text-slate-300 hover:text-white text-xl">&times;</button>
+      <h3 class="text-2xl font-black text-white flex gap-2"><i class="fa-regular fa-crown text-amber-400"></i> VIP Demo Request</h3>
+      <button onclick="closeDemoModal()" class="text-slate-300 hover:text-amber-300 text-2xl">&times;</button>
     </div>
-    <p class="text-slate-200 text-sm mb-6">Fill the form — a pipeline expert will reach out within 2 hours.</p>
+    <p class="text-slate-200 text-sm mb-6">Secure your pipeline walkthrough — a strategy leader will respond within 60 minutes.</p>
     <form id="demoForm">
       <div class="mb-4">
-        <input type="text" id="demoName" placeholder="Full name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400">
+        <input type="text" id="demoName" placeholder="Full name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400">
       </div>
       <div class="mb-4">
-        <input type="email" id="demoEmail" placeholder="Business email" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400">
+        <input type="email" id="demoEmail" placeholder="Business email" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400">
       </div>
       <div class="mb-4">
-        <input type="text" id="demoCompany" placeholder="Company name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-400">
+        <input type="text" id="demoCompany" placeholder="Company name" class="w-full bg-black/60 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:border-amber-400">
       </div>
-      <button type="submit" class="w-full btn-gradient py-3 rounded-xl font-bold text-white">Send request →</button>
-      <p class="text-[11px] text-center text-slate-400 mt-4">By submitting you agree to our terms & receive a strategy overview.</p>
+      <button type="submit" class="w-full btn-million py-3 rounded-xl font-bold text-white shadow-xl">Request VIP access →</button>
+      <p class="text-[10px] text-center text-slate-400 mt-4">By submitting, you agree to receive a confidential strategy overview.</p>
     </form>
   </div>
 </div>
 
 <script>
-  // Live feed data
+  // LIVE FEED PREMIUM VERSION
   const leadSamples = [
-    { title: "🔥 Emergency Roof Replacement", location: "Austin, TX", value: "$24,800", tag: "Verified" },
-    { title: "Storm Damage Claim", location: "Denver, CO", value: "$18,200", tag: "Insurance ready" },
-    { title: "Full Shingle Replacement", location: "Phoenix, AZ", value: "$15,450", tag: "Pre-approved" },
-    { title: "Leak Detection + Repair", location: "Portland, OR", value: "$5,300", tag: "High intent" },
-    { title: "Commercial Flat Roof", location: "Dallas, TX", value: "$42,000", tag: "Budget secured" },
-    { title: "New Construction TPO", location: "Charlotte, NC", value: "$67,500", tag: "Signed PO" },
-    { title: "Hail Damage Claim", location: "Oklahoma City, OK", value: "$31,200", tag: "Urgent" },
-    { title: "Metal Roof Upgrade", location: "Nashville, TN", value: "$27,900", tag: "Premium" }
+    { title: "🔥 Emergency Roof Replacement", location: "Austin, TX", value: "$27,400", tag: "Priority Verified" },
+    { title: "Storm Damage Insurance Claim", location: "Denver, CO", value: "$22,300", tag: "Pre‑approved" },
+    { title: "Full Shingle Replacement", location: "Phoenix, AZ", value: "$18,950", tag: "High Net Worth" },
+    { title: "Leak Detection + Full Repair", location: "Portland, OR", value: "$7,200", tag: "Immediate" },
+    { title: "Commercial Flat Roof", location: "Dallas, TX", value: "$49,800", tag: "Budget Secured" },
+    { title: "New Construction TPO", location: "Charlotte, NC", value: "$79,200", tag: "Signed PO" },
+    { title: "Hail Damage Emergency", location: "Oklahoma City", value: "$38,500", tag: "Urgent" },
+    { title: "Metal Roof Upgrade", location: "Nashville, TN", value: "$31,700", tag: "Premium Tier" }
   ];
 
   let displayedLeads = leadSamples.slice(0, 4);
@@ -368,18 +460,18 @@
     const container = document.getElementById('liveFeedContainer');
     if (!container) return;
     container.innerHTML = displayedLeads.map(lead => `
-      <div class="live-item rounded-xl p-3">
+      <div class="live-item-premium rounded-xl p-3 transition-all">
         <div class="flex justify-between items-start">
-          <div class="font-semibold text-white text-sm">${lead.title}</div>
-          <span class="text-[10px] bg-cyan-500/30 text-cyan-100 px-2 py-0.5 rounded-full">${lead.tag}</span>
+          <div class="font-bold text-white text-sm">${lead.title}</div>
+          <span class="text-[9px] bg-gradient-to-r from-amber-500/40 to-cyan-500/40 text-white px-2 py-0.5 rounded-full">${lead.tag}</span>
         </div>
         <div class="text-xs text-slate-300 mt-1 flex gap-3">
           <span><i class="fa-regular fa-location-dot"></i> ${lead.location}</span>
           <span><i class="fa-regular fa-tag"></i> Est. ${lead.value}</span>
         </div>
         <div class="flex justify-between items-center mt-2">
-          <span class="text-[10px] text-green-300"><i class="fa-regular fa-clock"></i> ${Math.floor(Math.random() * 12) + 1} min ago</span>
-          <span class="text-[10px] font-bold text-cyan-300">VERIFIED</span>
+          <span class="text-[10px] text-amber-300"><i class="fa-regular fa-clock"></i> ${Math.floor(Math.random() * 7) + 1} min ago</span>
+          <span class="text-[10px] font-black text-cyan-300">✓ AI VERIFIED</span>
         </div>
       </div>
     `).join('');
@@ -387,16 +479,15 @@
 
   function addNewLead() {
     const randomLead = leadSamples[Math.floor(Math.random() * leadSamples.length)];
-    const newLead = { ...randomLead, tag: randomLead.tag + " 🔔" };
+    const newLead = { ...randomLead, tag: randomLead.tag + " ⚡" };
     displayedLeads.unshift(newLead);
     if (displayedLeads.length > 5) displayedLeads.pop();
     renderFeed();
   }
-
   renderFeed();
-  setInterval(addNewLead, 8000);
+  setInterval(addNewLead, 7500);
 
-  // Modal logic
+  // MODAL LOGIC
   const modal = document.getElementById('demoModal');
   function openDemoModal() {
     modal.classList.remove('opacity-0', 'invisible');
@@ -419,16 +510,16 @@
       const email = document.getElementById('demoEmail')?.value;
       const company = document.getElementById('demoCompany')?.value;
       if(!name || !email || !company) {
-        alert("Please fill in all fields to book your demo.");
+        alert("Please complete all VIP fields to unlock demo.");
         return;
       }
-      alert(`✅ Thank you ${name} from ${company}! A NorthSky specialist will reach out within 2 hours to schedule your platform walkthrough.`);
+      alert(`✨ Thank you ${name} from ${company}. A NorthSky pipeline architect will reach out within 60 minutes.`);
       closeDemoModal();
       demoForm.reset();
     });
   }
 
-  // Smooth anchor scrolling
+  // SMOOTH SCROLL
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -440,11 +531,18 @@
       }
     });
   });
+
+  // REVEAL ON SCROLL (MILLION DOLLAR ANIMATION)
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -60px 0px" });
+  revealElements.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => el.classList.add('revealed'));
 </script>
-<style>
-  .custom-scroll::-webkit-scrollbar { width: 4px; }
-  .custom-scroll::-webkit-scrollbar-track { background: #0F172A; border-radius: 10px; }
-  .custom-scroll::-webkit-scrollbar-thumb { background: #0EA5E9; border-radius: 10px; }
-</style>
 </body>
 </html>
