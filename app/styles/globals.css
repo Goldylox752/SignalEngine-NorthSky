@@ -1,0 +1,195 @@
+/* =========================
+   RESET + BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: Geist, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #0A0A0F;
+  color: #F0F0F5;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+h1, h2, h3, h4 {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+p {
+  color: rgba(240, 240, 245, 0.75);
+  font-size: 15px;
+}
+
+/* =========================
+   LINKS
+========================= */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #4169E1;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #5b82f0;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* =========================
+   FORMS
+========================= */
+input, select, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: #13131A;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #4169E1;
+}
+
+/* =========================
+   LAYOUT HELPERS
+========================= */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+/* =========================
+   GRID FIX (IMPORTANT FOR MOBILE)
+========================= */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .section {
+    padding: 50px 0;
+  }
+
+  h1 {
+    font-size: 36px !important;
+  }
+}
+
+/* =========================
+   CARDS
+========================= */
+.card {
+  background: #13131A;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* =========================
+   ANIMATIONS (LIGHTWEIGHT)
+========================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0F;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4169E1;
+  border-radius: 10px;
+}
+
+/* =========================
+   MOBILE OPTIMIZATION FIXES
+   (THIS FIXES YOUR MAIN ISSUE)
+========================= */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
