@@ -1,9 +1,10 @@
 // index.js – NorthSky landing page interactions
-
 (function() {
   "use strict";
 
-  // ---------- Scroll Reveal ----------
+  // ------------------------------
+  // SCROLL REVEAL ANIMATIONS
+  // ------------------------------
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -17,12 +18,14 @@
   );
 
   document.querySelectorAll("[data-reveal]").forEach((el, idx) => {
-    // staggered delay (optional)
+    // Staggered delay (optional)
     el.style.transitionDelay = `${(idx % 4) * 60}ms`;
     revealObserver.observe(el);
   });
 
-  // ---------- Number Counters ----------
+  // ------------------------------
+  // STATISTICS NUMBER COUNTERS
+  // ------------------------------
   const countObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -32,11 +35,13 @@
           const suffix = el.getAttribute("data-suffix") || "";
           const prefix = el.getAttribute("data-prefix") || "";
           const display = el.getAttribute("data-display");
+
+          // Static value (no animation)
           if (display) {
-            // static text – no animation
             countObserver.unobserve(el);
             return;
           }
+
           const duration = 1600;
           const startTime = performance.now();
 
@@ -59,7 +64,9 @@
     countObserver.observe(el);
   });
 
-  // ---------- Hero Dashboard Counters (fixed values) ----------
+  // ------------------------------
+  // HERO DASHBOARD COUNTERS
+  // ------------------------------
   function runHeroCounter(id, target, suffix, duration = 1800, delay = 800) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -79,9 +86,10 @@
   runHeroCounter("counter-close", 41, "%", 1800, 800);
   runHeroCounter("counter-leads", 127, "", 1400, 800);
 
-  // ---------- Feature Tabs ----------
-  window.switchFeat = function(index) {
-    // update feature buttons
+  // ------------------------------
+  // FEATURE TABS (AI Lead Scoring, Storm Intelligence, CRM Auto-Sync)
+  // ------------------------------
+  function switchFeat(index) {
     const features = document.querySelectorAll(".feat");
     const panels = document.querySelectorAll(".preview-panel");
     if (!features.length || !panels.length) return;
@@ -93,56 +101,65 @@
     const targetPanel = document.getElementById(`feat-${index}`);
     if (targetFeat) targetFeat.classList.add("active");
     if (targetPanel) targetPanel.classList.add("active");
-  };
+  }
 
-  // attach click handlers to .feat elements (in case they are not using onclick)
+  // Attach click handlers to feature items
   document.querySelectorAll(".feat").forEach((feat) => {
     const idx = feat.getAttribute("data-feat");
     if (idx !== null && !feat.hasAttribute("data-listener")) {
       feat.setAttribute("data-listener", "true");
-      feat.addEventListener("click", () => window.switchFeat(parseInt(idx)));
+      feat.addEventListener("click", () => switchFeat(parseInt(idx)));
     }
   });
 
-  // ---------- FAQ Toggle ----------
-  window.toggleFaq = function(btn) {
+  // ------------------------------
+  // FAQ TOGGLE (Accordion)
+  // ------------------------------
+  function toggleFaq(btn) {
     const item = btn.closest(".faq-item");
     if (!item) return;
     const isOpen = item.classList.contains("open");
-    // close all others
+
+    // Close all other FAQ items
     document.querySelectorAll(".faq-item.open").forEach((faq) => {
       faq.classList.remove("open");
     });
-    if (!isOpen) item.classList.add("open");
-  };
 
-  // attach listeners to FAQ buttons (in case onclick is missing)
+    // Open the clicked one if it was closed
+    if (!isOpen) item.classList.add("open");
+  }
+
+  // Attach listeners to all FAQ buttons
   document.querySelectorAll(".faq-btn").forEach((btn) => {
     if (!btn.hasAttribute("data-faq-listener")) {
       btn.setAttribute("data-faq-listener", "true");
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        window.toggleFaq(btn);
+        toggleFaq(btn);
       });
     }
   });
 
-  // ensure first FAQ item stays open by default (class "open" already in HTML)
-  // but if none is open, open the first one (optional)
+  // Ensure at least one FAQ is open (first one by default)
   if (!document.querySelector(".faq-item.open")) {
-    const first = document.querySelector(".faq-item");
-    if (first) first.classList.add("open");
+    const firstFaq = document.querySelector(".faq-item");
+    if (firstFaq) firstFaq.classList.add("open");
   }
 
-  // ---------- Smooth Scroll ----------
-  window.scrollTo = function(id) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // ------------------------------
+  // SMOOTH SCROLL FOR INTERNAL LINKS
+  // ------------------------------
+  // Handle "See how it works" button
+  const seeHowBtn = document.querySelector(".btn-outline");
+  if (seeHowBtn) {
+    seeHowBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const featuresSection = document.getElementById("features");
+      if (featuresSection) featuresSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
-  // handle navigation links with # (optional)
+  // Handle all anchor links with hash (#)
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function(e) {
       const targetId = this.getAttribute("href").slice(1);
@@ -153,26 +170,23 @@
     });
   });
 
-  // ---------- Demo / CTA Handler ----------
-  window.openDemo = function() {
-    // Replace with actual booking link (Calendly, etc.)
-    alert("Connect your Calendly or booking link here.");
-  };
+  // ------------------------------
+  // DEMO BUTTON HANDLER (Redirect to your backend booking page)
+  // ------------------------------
+  const DEMO_URL = "https://exchange-8gxt.onrender.com";
 
-  // attach demo handlers to any .btn-primary or .btn-white that have onclick="openDemo()"
-  // but also handle them without inline onclick (for safety)
-  const demoButtons = document.querySelectorAll(
-    ".btn-primary, .btn-white, .nav-cta"
-  );
+  function openDemo() {
+    window.open(DEMO_URL, "_blank");
+  }
+
+  // Attach to all demo trigger buttons (primary, white, nav-cta)
+  const demoButtons = document.querySelectorAll(".btn-primary, .btn-white, .nav-cta");
   demoButtons.forEach((btn) => {
     if (!btn.hasAttribute("data-demo-listener")) {
       btn.setAttribute("data-demo-listener", "true");
       btn.addEventListener("click", (e) => {
-        // avoid double alert if onclick is already present
-        if (!btn.hasAttribute("onclick")) {
-          e.preventDefault();
-          window.openDemo();
-        }
+        e.preventDefault();
+        openDemo();
       });
     }
   });
