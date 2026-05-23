@@ -97,14 +97,11 @@ nav{
     radial-gradient(ellipse 50% 50% at 10% 80%,rgba(26,63,166,.04) 0%,transparent 60%);
   pointer-events:none;
 }
-
-/* Grain texture */
 .hero::after{
   content:'';position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events:none;opacity:.6;
 }
-
 .hero-inner{position:relative;z-index:1}
 
 .hero-eyebrow{
@@ -531,7 +528,7 @@ footer{
       <a href="#testimonials">Results</a>
       <a href="#faq">FAQ</a>
     </div>
-    <button class="nav-cta" onclick="openDemo()">Book a Demo</button>
+    <button class="nav-cta">Book a Demo</button>
   </div>
 </nav>
 
@@ -555,8 +552,8 @@ footer{
       </p>
 
       <div class="hero-actions" data-reveal>
-        <button class="btn-primary" onclick="openDemo()">Book Free Demo &rarr;</button>
-        <button class="btn-outline" onclick="scrollTo('features')">See how it works</button>
+        <button class="btn-primary">Book Free Demo &rarr;</button>
+        <button class="btn-outline">See how it works</button>
       </div>
 
       <div class="hero-trust" data-reveal>
@@ -668,17 +665,17 @@ footer{
 
     <div class="features-layout">
       <div class="features-list" data-reveal>
-        <div class="feat active" data-feat="0" onclick="switchFeat(0)">
+        <div class="feat active" data-feat="0">
           <div class="feat-icon">★</div>
           <div class="feat-title">AI Lead Scoring</div>
           <div class="feat-body">Know which homeowners will buy before you knock. NorthSky scores every lead on 40+ signals so you prioritize ruthlessly.</div>
         </div>
-        <div class="feat" data-feat="1" onclick="switchFeat(1)">
+        <div class="feat" data-feat="1">
           <div class="feat-icon">⚡</div>
           <div class="feat-title">Storm Intelligence</div>
           <div class="feat-body">Real-time storm zones with auto-generated lead clusters in your territory, delivered in under 7 minutes.</div>
         </div>
-        <div class="feat" data-feat="2" onclick="switchFeat(2)">
+        <div class="feat" data-feat="2">
           <div class="feat-icon">⟳</div>
           <div class="feat-title">CRM Auto-Sync</div>
           <div class="feat-body">HubSpot, Salesforce, and JobNimbus updated instantly. Zero manual entry. Your reps focus on selling, not data.</div>
@@ -771,7 +768,7 @@ footer{
         <h2>See your own pipeline scored live.</h2>
         <p>30-minute demo. No slides. We'll pull real leads from your area and score them on the call.</p>
       </div>
-      <button class="btn-white" onclick="openDemo()">Book Free Demo &rarr;</button>
+      <button class="btn-white">Book Free Demo &rarr;</button>
     </div>
   </div>
 </div>
@@ -784,47 +781,41 @@ footer{
       <h2 class="section-title">Questions before you commit</h2>
     </div>
     <div class="faq-list" data-reveal>
-
       <div class="faq-item open">
-        <button class="faq-btn" onclick="toggleFaq(this)">
+        <button class="faq-btn">
           <span class="faq-q">How fast can we get started?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-ans"><p>Most roofing teams are fully live within 24 hours. We handle the CRM connection and territory setup on our end — you just point your reps at the dashboard.</p></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
+        <button class="faq-btn">
           <span class="faq-q">Which CRMs do you integrate with?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-ans"><p>HubSpot, Salesforce, and JobNimbus natively. We also support Zapier for anything else in your stack. All syncs are two-way and real-time.</p></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
+        <button class="faq-btn">
           <span class="faq-q">Is there a long-term contract?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-ans"><p>No. Month-to-month by default. We offer annual pricing with a discount, but we'd rather earn your business every month than lock you in.</p></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
+        <button class="faq-btn">
           <span class="faq-q">How accurate is the AI scoring?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-ans"><p>Across 2M+ scored leads, teams closing leads scored 85+ see a 34% higher close rate vs. their historical baseline. The model improves as it learns your territory and team's win patterns.</p></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-btn" onclick="toggleFaq(this)">
+        <button class="faq-btn">
           <span class="faq-q">What does the demo actually look like?</span>
           <span class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-ans"><p>30 minutes, no slides. We pull real leads from your actual territory, score them live, and walk you through the storm alert tool. You'll see exactly what your team would see on day one.</p></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -835,7 +826,7 @@ footer{
     <h2>Your pipeline,<br/><em>fully optimized.</em></h2>
     <p>Join 200+ roofing teams already closing more jobs with less effort.</p>
     <div class="final-actions">
-      <button class="btn-primary" onclick="openDemo()" style="font-size:17px;padding:18px 34px">Book Free Demo &rarr;</button>
+      <button class="btn-primary" style="font-size:17px;padding:18px 34px">Book Free Demo &rarr;</button>
     </div>
     <div class="final-trust">
       <div class="trust-item"><span class="trust-icon">✓</span> No credit card required</div>
@@ -852,88 +843,178 @@ footer{
 </footer>
 
 <script>
-/* ── Scroll reveal ─────────────────────── */
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      observer.unobserve(e.target);
+/* ============================================================
+   FIXED & INTEGRATED INDEX.JS (No external dependencies)
+   ============================================================ */
+(function() {
+  "use strict";
+
+  // ---------- Scroll Reveal ----------
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll("[data-reveal]").forEach((el, idx) => {
+    el.style.transitionDelay = `${(idx % 4) * 60}ms`;
+    revealObserver.observe(el);
+  });
+
+  // ---------- Number Counters ----------
+  const countObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.getAttribute("data-count"));
+          const suffix = el.getAttribute("data-suffix") || "";
+          const prefix = el.getAttribute("data-prefix") || "";
+          const display = el.getAttribute("data-display");
+          if (display) {
+            countObserver.unobserve(el);
+            return;
+          }
+          const duration = 1600;
+          const startTime = performance.now();
+
+          function animate(now) {
+            const p = Math.min((now - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            const current = Math.round(ease * target);
+            el.textContent = prefix + current + suffix;
+            if (p < 1) requestAnimationFrame(animate);
+          }
+          requestAnimationFrame(animate);
+          countObserver.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll("[data-count]").forEach((el) => {
+    countObserver.observe(el);
+  });
+
+  // ---------- Hero Dashboard Counters ----------
+  function runHeroCounter(id, target, suffix, duration = 1800, delay = 800) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    setTimeout(() => {
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const value = Math.round(ease * target);
+        el.textContent = value + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }, delay);
+  }
+
+  runHeroCounter("counter-close", 41, "%", 1800, 800);
+  runHeroCounter("counter-leads", 127, "", 1400, 800);
+
+  // ---------- Feature Tabs ----------
+  function switchFeat(index) {
+    const features = document.querySelectorAll(".feat");
+    const panels = document.querySelectorAll(".preview-panel");
+    if (!features.length || !panels.length) return;
+
+    features.forEach((feat) => feat.classList.remove("active"));
+    panels.forEach((panel) => panel.classList.remove("active"));
+
+    const targetFeat = document.querySelector(`.feat[data-feat="${index}"]`);
+    const targetPanel = document.getElementById(`feat-${index}`);
+    if (targetFeat) targetFeat.classList.add("active");
+    if (targetPanel) targetPanel.classList.add("active");
+  }
+
+  document.querySelectorAll(".feat").forEach((feat) => {
+    const idx = feat.getAttribute("data-feat");
+    if (idx !== null && !feat.hasAttribute("data-listener")) {
+      feat.setAttribute("data-listener", "true");
+      feat.addEventListener("click", () => switchFeat(parseInt(idx)));
     }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('[data-reveal]').forEach((el, i) => {
-  el.style.transitionDelay = (i % 4) * 60 + 'ms';
-  observer.observe(el);
-});
 
-/* ── Counters ──────────────────────────── */
-function animateCount(el) {
-  const target = +el.dataset.count;
-  const suffix = el.dataset.suffix || '';
-  const prefix = el.dataset.prefix || '';
-  const display = el.dataset.display;
-  if (display) return; // static display value
-  const dur = 1600;
-  const start = performance.now();
-  const tick = now => {
-    const p = Math.min((now - start) / dur, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = prefix + Math.round(ease * target) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-const countObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCount(e.target);
-      countObs.unobserve(e.target);
+  // ---------- FAQ Toggle ----------
+  function toggleFaq(btn) {
+    const item = btn.closest(".faq-item");
+    if (!item) return;
+    const isOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach((faq) => {
+      faq.classList.remove("open");
+    });
+    if (!isOpen) item.classList.add("open");
+  }
+
+  document.querySelectorAll(".faq-btn").forEach((btn) => {
+    if (!btn.hasAttribute("data-faq-listener")) {
+      btn.setAttribute("data-faq-listener", "true");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        toggleFaq(btn);
+      });
     }
   });
-}, { threshold: 0.5 });
-document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
 
-// Hero dashboard counters
-function runHeroCounter(id, target, suffix, dur) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const start = performance.now();
-  const tick = now => {
-    const p = Math.min((now - start) / dur, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(ease * target) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  setTimeout(() => requestAnimationFrame(tick), 800);
-}
-runHeroCounter('counter-close', 41, '%', 1800);
-runHeroCounter('counter-leads', 127, '', 1400);
+  if (!document.querySelector(".faq-item.open")) {
+    const first = document.querySelector(".faq-item");
+    if (first) first.classList.add("open");
+  }
 
-/* ── Feature tabs ──────────────────────── */
-function switchFeat(i) {
-  document.querySelectorAll('.feat').forEach(f => f.classList.remove('active'));
-  document.querySelectorAll('.preview-panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`.feat[data-feat="${i}"]`).classList.add('active');
-  document.getElementById(`feat-${i}`).classList.add('active');
-}
+  // ---------- Smooth Scroll ----------
+  function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 
-/* ── FAQ ───────────────────────────────── */
-function toggleFaq(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function(e) {
+      const targetId = this.getAttribute("href").slice(1);
+      if (targetId && document.getElementById(targetId)) {
+        e.preventDefault();
+        document.getElementById(targetId).scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
 
-/* ── Smooth scroll ─────────────────────── */
-function scrollTo(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
+  // Handle "See how it works" button
+  const seeHowBtn = document.querySelector('.btn-outline');
+  if (seeHowBtn) {
+    seeHowBtn.addEventListener('click', () => scrollToSection('features'));
+  }
 
-/* ── Demo CTA ──────────────────────────── */
-function openDemo() {
-  alert('Connect your Calendly or booking link here.');
-}
+  // ---------- Demo / CTA Handler (Open your backend URL) ----------
+  function openDemo() {
+    // Replace with your actual booking/demo URL
+    window.open('https://exchange-8gxt.onrender.com', '_blank');
+  }
+
+  const demoButtons = document.querySelectorAll(
+    ".btn-primary, .btn-white, .nav-cta"
+  );
+  demoButtons.forEach((btn) => {
+    if (!btn.hasAttribute("data-demo-listener")) {
+      btn.setAttribute("data-demo-listener", "true");
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openDemo();
+      });
+    }
+  });
+})();
 </script>
 </body>
 </html>
